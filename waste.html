@@ -1,0 +1,164 @@
+<div class="body">
+  <header />
+  <div class="homepage">
+    <main />
+    <footer />
+
+    <div class="popup popup_profile">
+      <div class="popup__container">
+        <h3 class="popup__title">Edit Profile</h3>
+        <form
+          method="POST"
+          class="popup__form popup__form_profile"
+          name="profileData"
+          novalidate
+        >
+          <input
+            id="profile-title-input"
+            name="name"
+            type="text"
+            class="popup__input popup__input_value_name"
+            placeholder="Name"
+            value=""
+            minlength="2"
+            maxlength="40"
+            required
+          />
+          <span
+            id="profile-title-input-error"
+            class="popup__input-error"
+          ></span>
+          <input
+            id="profile-about-input"
+            name="about"
+            type="text"
+            class="popup__input popup__input_value_about"
+            placeholder="About Me"
+            value=""
+            minlength="2"
+            maxlength="200"
+            required
+          />
+          <span
+            id="profile-about-input-error"
+            class="popup__input-error"
+          ></span>
+          <button type="submit" class="popup__btn" aria-label="Save Button">
+            Save
+          </button>
+        </form>
+        <button
+          type="button"
+          class="popup__close-btn"
+          aria-label="Close Button"
+        ></button>
+      </div>
+    </div>
+
+    <div class="popup popup_card">
+      <div class="popup__container">
+        <h3 class="popup__title">New Place</h3>
+        <form
+          method="POST"
+          class="popup__form popup__form_card"
+          name="newPlace"
+        >
+          <input
+            id="card-title-input"
+            name="name"
+            type="text"
+            class="popup__input popup__input_place_name"
+            placeholder="Name"
+            value=""
+            minlength="2"
+            maxlength="250"
+            required
+          />
+          <span id="card-title-input-error" class="popup__input-error"></span>
+          <input
+            id="card-link-input"
+            name="link"
+            type="url"
+            class="popup__input popup__input_place_image-url"
+            placeholder="Image URL"
+            value=""
+            minlength="2"
+            maxlength="250"
+            required
+          />
+          <span id="card-link-input-error" class="popup__input-error"></span>
+          <button type="submit" class="popup__btn" aria-label="Save Button">
+            Save
+          </button>
+        </form>
+        <button
+          type="button"
+          class="popup__close-btn"
+          aria-label="Close Button"
+        ></button>
+      </div>
+    </div>
+  </div>
+  <div class="popup popup_confirmation-delete">
+    <div class="popup__container">
+      <h3 class="popup__title popup__title_confirmation-delete">
+        Are you sure?
+      </h3>
+      <form action="POST" class="popup__form" name="deleteConfirmation">
+        <button class="popup__btn popup__btn_confirmation-delete">Yes</button>
+      </form>
+      <button
+        type="button"
+        class="popup__close-btn"
+        aria-label="Close Button"
+      ></button>
+    </div>
+  </div>
+
+  <div class="popup popup_profile-image-edit">
+    <div class="popup__container">
+      <form
+        action="POST"
+        class="popup__form popup__form-profile-image"
+        name="editProfilePicture"
+      >
+        <h3 class="popup__title popup__title_profile-image-edit">
+          Change profile picture
+        </h3>
+        <input
+          id="image-link-input"
+          name="avatar"
+          type="url"
+          class="popup__input popup__input_profile_link"
+          placeholder="url"
+          value=""
+          minlength="2"
+          maxlength="250"
+          required
+        />
+        <span
+          id="image-link-input-error"
+          class="popup__input-error popup__input-error_profile-image"
+        ></span>
+        <button class="popup__btn popup__btn_profile-image-edit">Save</button>
+        <button
+          type="button"
+          class="popup__close-btn"
+          aria-label="Close Button"
+        ></button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_image-expanded">
+    <div class="image-expanded">
+      <div class="image-expanded__container">
+        <img src="#" alt="#" class="image-expanded__image" />
+        <h2 class="image-expanded__title">a</h2>
+        <button class="popup__close-btn" type="button"></button>
+      </div>
+    </div>
+  </div>
+
+  <template id="cards"></template>
+</div>
