@@ -1,23 +1,20 @@
-import loader from "../images/loading.gif";
-
-
 function Main(props) {
 
   return (
     <main className="main">
       <section className="profile">
         <div className="profile__picture" onClick={props.onEditAvatarClick}>
-          <img src={loader}  alt="Jacques Cousteau" className="profile__image" />
+          <img src={props.userAvatar}  alt="Jacques Cousteau" className="profile__image" />
         </div>
         <div className="profile__info">
-          <h1 className="profile__title">Ahnaf Ahamed </h1>
+          <h1 className="profile__title">{props.userName}</h1>
           <button
             type="button"
             className="profile__edit-button"
             aria-label="Edit Button"
             onClick={props.onEditProfileClick}
           ></button>
-          <p className="profile__tag">Coder </p>
+          <p className="profile__tag">{props.userDescription}</p>
         </div>
         <button
           type="button"
