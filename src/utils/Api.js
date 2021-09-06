@@ -12,20 +12,19 @@ class Api {
   }
 
   renderUserInfo() {
-    return fetch(this.baseUrl + '/users/me', {
+    return fetch(this.baseUrl + "/users/me", {
       headers: this.headers,
       method: "GET",
     }).then((res) => this._checkResponse(res));
   }
 
   renderCards() {
-    return fetch(this.baseUrl + '/cards', {
+    return fetch(this.baseUrl + "/cards", {
       headers: this.headers,
       method: "GET",
     }).then((res) => this._checkResponse(res));
   }
 }
-
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-13",
@@ -35,4 +34,4 @@ const api = new Api({
   },
 });
 
-export default api; 
+export default api;

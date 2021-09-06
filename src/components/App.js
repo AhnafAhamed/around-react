@@ -26,9 +26,9 @@ function App() {
 
   useEffect(() => {
     api.renderCards().then((data) => {
-        setCards(data)
-    })
-  }, [])
+      setCards(data);
+    });
+  }, []);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -61,8 +61,6 @@ function App() {
     }
   }
 
-  
-
   document.addEventListener("keyup", handleEscClose);
 
   return (
@@ -87,10 +85,14 @@ function App() {
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
           />
-          
+
           <AddCardPopup isOpen={isAddCardPopupOpen} onClose={closeAllPopups} />
 
-          <ImagePopup card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups} />
+          <ImagePopup
+            card={selectedCard}
+            isOpen={isImagePopupOpen}
+            onClose={closeAllPopups}
+          />
         </div>
       </div>
     </>
@@ -98,4 +100,3 @@ function App() {
 }
 
 export default App;
-
