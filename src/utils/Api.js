@@ -17,6 +17,13 @@ class Api {
       method: "GET",
     }).then((res) => this._checkResponse(res));
   }
+
+  renderCards() {
+    return fetch(this.baseUrl + '/cards', {
+      headers: this.headers,
+      method: "GET",
+    }).then((res) => this._checkResponse(res));
+  }
 }
 
 
@@ -28,6 +35,4 @@ const api = new Api({
   },
 });
 
-const initialProfileInfo = api.renderUserInfo();
-
-export default initialProfileInfo;
+export default api; 

@@ -6,24 +6,29 @@ import Footer from "./Footer";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddCardPopup from "./AddCardPopup";
-import initialProileInfo from "../utils/Api";
+import ImagePopup from "./ImagePopup";
+import api from "../utils/Api";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddCardPopupOpen, setIsAddCardPopupOpen] = useState(false);
-
+  const [isImagePopupOpen, setIsImagePopuOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
   const [profileInfo, setProfileInfo] = useState([]);
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    initialProileInfo.then((data) => {
-      setProfileInfo({
-        name: data.name,
-        about: data.about,
-        avatar: data.avatar,
-      });
+    api.renderUserInfo().then((data) => {
+      setProfileInfo(data);
     });
-  }, [profileInfo]);
+  }, []);
+
+  useEffect(() => {
+    api.renderCards().then((data) => {
+        setCards(data)
+    })
+  }, [])
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -37,10 +42,17 @@ function App() {
     setIsAddCardPopupOpen(true);
   }
 
+  function handleCardClick(card) {
+    setSelectedCard(card);
+    setIsImagePopuOpen(true);
+  }
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddCardPopupOpen(false);
+    setIsImagePopuOpen(false);
+    setSelectedCard(null);
   }
 
   function handleEscClose(evt) {
@@ -48,6 +60,8 @@ function App() {
       closeAllPopups();
     }
   }
+
+  
 
   document.addEventListener("keyup", handleEscClose);
 
@@ -57,14 +71,13 @@ function App() {
         <Header />
         <div className="homepage">
           <Main
-            userAvatar={profileInfo.avatar}
-            userName={profileInfo.name}
-            userDescription={profileInfo.about}
+            user={profileInfo}
+            cards={cards}
+            onCardClick={handleCardClick}
             onEditProfileClick={handleEditProfileClick}
             onEditAvatarClick={handleEditAvatarClick}
             onAddPlaceClick={handleAddPlaceClick}
           />
-
           <Footer />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
@@ -74,7 +87,10 @@ function App() {
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
           />
+          
           <AddCardPopup isOpen={isAddCardPopupOpen} onClose={closeAllPopups} />
+
+          <ImagePopup card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups} />
         </div>
       </div>
     </>
@@ -82,4 +98,4 @@ function App() {
 }
 
 export default App;
-// userAvatar={} userName={} userDescription={}
+
