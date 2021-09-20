@@ -1,16 +1,27 @@
+import { useRef } from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function EditAvatarPopup(props) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar}) {
+
+  const avatarRef = useRef();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onUpdateAvatar(avatarRef.current.value)
+  }
+
   return (
     <>
       <PopupWithForm
         name="avatar"
         title="Change Profile Picture"
         buttonText="Save"
-        isOpen={props.isOpen}
-        onClose={props.onClose}
+        isOpen={isOpen}
+        onClose={onClose}
+        onSubmit={handleSubmit}
       >
         <input
+          ref={avatarRef}
           id="image-link-input"
           name="avatar"
           type="url"
