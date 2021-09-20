@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Card({ onCardClick, onCardLike, card }) {
+function Card({ onCardClick, onCardLike, onCardDelete, card }) {
   function handleClick() {
     onCardClick(card);
   }
@@ -41,6 +41,7 @@ function Card({ onCardClick, onCardLike, card }) {
         </div>
         <button
           className={cardDeleteButtonClassName}
+          onClick={() => onCardDelete(card)}
           type="button"
           aria-label="Delete Button"
         ></button>

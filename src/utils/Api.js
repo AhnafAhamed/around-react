@@ -25,6 +25,28 @@ class Api {
     }).then((res) => this._checkResponse(res));
   }
 
+  addCard({name, link}) {
+    return fetch(this.baseUrl + "/cards", {
+      headers: this.headers,
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        link
+      })
+    }).then((res) => this._checkResponse(res));
+  }
+
+  setUserInfo({name, about}) {
+    return fetch(this.baseUrl + "/users/me/", {
+      headers: this.headers,
+      method: "PATCH",
+      body: JSON.stringify({
+        name,
+        about
+      })
+    }).then((res) => this._checkResponse(res));
+  }
+
   addLike(cardId) {
     return fetch(this.baseUrl + "/cards/likes/" + cardId, {
       headers: this.headers,

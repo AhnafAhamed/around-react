@@ -40,7 +40,20 @@ function App() {
       const newCards = cards.map((c) => ((c._id === card._id) ? newCard : c));
       setCards(newCards);
     })
-    
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card._id).then(() => {
+      const cardList = cards.filter((c) => c._id !== card._id);
+      setCards(cardList)
+    })
+  }
+
+  function handleUpdateUser({ name, about}) {
+    api.setUserInfo({ name, about }).then((data) => {
+      setCurrentUser(data);
+      closePopups();
+    })
   }
 
   function handleEditProfileClick() {
@@ -93,6 +106,7 @@ function App() {
           <div className="homepage">
             <Main
               cards={cards}
+              onCardDelete={handleCardDelete}
               onCardLike={handleCardLike}
               onCardClick={handleCardClick}
               onEditProfileClick={handleEditProfileClick}
@@ -103,6 +117,7 @@ function App() {
             <EditProfilePopup
               isOpen={isEditProfilePopupOpen}
               onClose={closeAllPopups}
+              onUpdateUser={handleUpdateUser}
             />
             <EditAvatarPopup
               isOpen={isEditAvatarPopupOpen}

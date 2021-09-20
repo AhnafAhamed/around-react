@@ -8,6 +8,7 @@ function Main({
   onAddPlaceClick,
   onCardClick,
   onCardLike,
+  onCardDelete,
   cards
 })
 
@@ -46,7 +47,7 @@ function Main({
           <ul className="elements">
             <>
               {cards.map((card) => (
-                <Card key={card._id} card={card} onCardLike={onCardLike} onCardClick={onCardClick} />
+                <Card key={card._id} card={card} onCardDelete={onCardDelete} onCardLike={onCardLike} onCardClick={onCardClick} />
               ))}
             </>
           </ul>
