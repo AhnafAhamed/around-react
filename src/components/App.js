@@ -31,6 +31,18 @@ function App() {
     });
   }, []);
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    let likeStatus = (isLiked === false) ?  api.addLike(card._id) : api.removeLike(card._id);
+
+    likeStatus.then((newCard) => {
+      const newCards = cards.map((c) => ((c._id === card._id) ? newCard : c));
+      setCards(newCards);
+    })
+    
+  }
+
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
@@ -81,6 +93,7 @@ function App() {
           <div className="homepage">
             <Main
               cards={cards}
+              onCardLike={handleCardLike}
               onCardClick={handleCardClick}
               onEditProfileClick={handleEditProfileClick}
               onEditAvatarClick={handleEditAvatarClick}

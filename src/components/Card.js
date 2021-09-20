@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Card({ onCardClick, card }) {
+function Card({ onCardClick, onCardLike, card }) {
   function handleClick() {
     onCardClick(card);
   }
@@ -33,9 +33,10 @@ function Card({ onCardClick, card }) {
             <button
               type="button"
               className={cardLikeButtonClassName}
+              onClick={() => onCardLike(card)}
               aria-label="Heart Button"
             ></button>
-            <span className="elements__like-counter">{card.likes.length}</span>
+            <span className="elements__like-counter" >{card.likes.length}</span>
           </div>
         </div>
         <button

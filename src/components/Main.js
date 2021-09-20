@@ -7,6 +7,7 @@ function Main({
   onEditProfileClick,
   onAddPlaceClick,
   onCardClick,
+  onCardLike,
   cards
 })
 
@@ -45,7 +46,7 @@ function Main({
           <ul className="elements">
             <>
               {cards.map((card) => (
-                <Card key={card._id} card={card} onCardClick={onCardClick} />
+                <Card key={card._id} card={card} onCardLike={onCardLike} onCardClick={onCardClick} />
               ))}
             </>
           </ul>

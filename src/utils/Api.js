@@ -24,6 +24,29 @@ class Api {
       method: "GET",
     }).then((res) => this._checkResponse(res));
   }
+
+  addLike(cardId) {
+    return fetch(this.baseUrl + "/cards/likes/" + cardId, {
+      headers: this.headers,
+      method: "PUT"
+    }).then((res) => this._checkResponse(res));
+  }
+
+  removeLike(cardId) {
+    return fetch(this.baseUrl + "/cards/likes/" + cardId, {
+      headers: this.headers,
+      method: "DELETE"
+    }).then((res) => this._checkResponse(res));
+  }
+
+  deleteCard(cardId) {
+    return fetch(this.baseUrl + "/cards/" + cardId, {
+      headers: this.headers,
+      method: "DELETE"
+    }).then((res) => this._checkResponse(res));
+  }
+
+  
 }
 
 const api = new Api({
