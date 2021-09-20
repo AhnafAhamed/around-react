@@ -5,15 +5,15 @@ import Main from "./Main";
 import Footer from "./Footer";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
-import AddCardPopup from "./AddCardPopup";
+import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
-import api from "../utils/Api";
+import api from "../utils/api";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isAddCardPopupOpen, setIsAddCardPopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopuOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [cards, setCards] = useState([]);
@@ -79,7 +79,7 @@ function App() {
   }
 
   function handleAddPlaceClick() {
-    setIsAddCardPopupOpen(true);
+    setIsAddPlacePopupOpen(true);
   }
 
   function handleCardClick(card) {
@@ -90,7 +90,7 @@ function App() {
   function closePopups() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setIsAddCardPopupOpen(false);
+    setIsAddPlacePopupOpen(false);
     setIsImagePopuOpen(false);
     setSelectedCard(null);
   }
@@ -139,8 +139,8 @@ function App() {
               onUpdateAvatar={handleUpdateAvatar}
             />
 
-            <AddCardPopup
-              isOpen={isAddCardPopupOpen}
+            <AddPlacePopup
+              isOpen={isAddPlacePopupOpen}
               onClose={closeAllPopups}
               onAddCard={handleAddCard}
             />
