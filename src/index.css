@@ -22,6 +22,7 @@
 @import url(./blocks/elements/__heart-icon/elements__heart-icon.css);
 @import url(./blocks/elements/__heart-icon/_liked/elements__heart-icon_liked.css);
 @import url(./blocks/elements/__delete-icon/elements__delete-icon.css);
+@import url(./blocks/elements/__delete-icon/_hidden/elements__delete-icon_hidden.css);
 @import url(./blocks/elements/__card/_deleted/elements__card_deleted.css);
 @import url(./blocks/elements/__likes/elements__likes.css);
 @import url(./blocks/elements/__like-counter/elements__like-counter.css);

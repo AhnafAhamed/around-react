@@ -8,6 +8,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddCardPopup from "./AddCardPopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -15,12 +16,12 @@ function App() {
   const [isAddCardPopupOpen, setIsAddCardPopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopuOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [profileInfo, setProfileInfo] = useState([]);
   const [cards, setCards] = useState([]);
+  const [currentUser, setCurrentUser] = useState([]);
 
   useEffect(() => {
     api.renderUserInfo().then((data) => {
-      setProfileInfo(data);
+      setCurrentUser(data);
     });
   }, []);
 
@@ -47,7 +48,7 @@ function App() {
     setIsImagePopuOpen(true);
   }
 
-  function closeAllPopups() {
+  function closePopups() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddCardPopupOpen(false);
@@ -55,9 +56,18 @@ function App() {
     setSelectedCard(null);
   }
 
+  function closeAllPopups(e) {
+    if (
+      e.target.classList.contains("popup_open") ||
+      e.target.classList.contains("popup__close-btn")
+    ) {
+      closePopups();
+    }
+  }
+
   function handleEscClose(evt) {
     if (evt.key === "Escape") {
-      closeAllPopups();
+      closePopups();
     }
   }
 
@@ -65,36 +75,40 @@ function App() {
 
   return (
     <>
-      <div className="body">
-        <Header />
-        <div className="homepage">
-          <Main
-            user={profileInfo}
-            cards={cards}
-            onCardClick={handleCardClick}
-            onEditProfileClick={handleEditProfileClick}
-            onEditAvatarClick={handleEditAvatarClick}
-            onAddPlaceClick={handleAddPlaceClick}
-          />
-          <Footer />
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-          />
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-          />
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className="body">
+          <Header />
+          <div className="homepage">
+            <Main
+              cards={cards}
+              onCardClick={handleCardClick}
+              onEditProfileClick={handleEditProfileClick}
+              onEditAvatarClick={handleEditAvatarClick}
+              onAddPlaceClick={handleAddPlaceClick}
+            />
+            <Footer />
+            <EditProfilePopup
+              isOpen={isEditProfilePopupOpen}
+              onClose={closeAllPopups}
+            />
+            <EditAvatarPopup
+              isOpen={isEditAvatarPopupOpen}
+              onClose={closeAllPopups}
+            />
 
-          <AddCardPopup isOpen={isAddCardPopupOpen} onClose={closeAllPopups} />
+            <AddCardPopup
+              isOpen={isAddCardPopupOpen}
+              onClose={closeAllPopups}
+            />
 
-          <ImagePopup
-            card={selectedCard}
-            isOpen={isImagePopupOpen}
-            onClose={closeAllPopups}
-          />
+            <ImagePopup
+              card={selectedCard}
+              isOpen={isImagePopupOpen}
+              onClose={closeAllPopups}
+            />
+          </div>
         </div>
-      </div>
+      </CurrentUserContext.Provider>
     </>
   );
 }
